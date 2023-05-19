@@ -20,6 +20,28 @@ describe('App', () => {
         <App />
       </BrowserRouter>
     );
-    expect(getByText(/Welcome jsx-tutorial/gi)).toBeTruthy();
+    expect(getByText(/Welcome to jsx-tutorial!/)).toBeTruthy();
+  });
+
+  it('should have a custom greeting', () => {
+    const { getByText } = render(
+      <BrowserRouter>
+        <App message="Custom Message!" />
+      </BrowserRouter>
+    );
+    expect(getByText(/Custom Message!/)).toBeTruthy();
+  });
+
+  it('should have the current time', async () => {
+    const { findByText } = render(
+      <BrowserRouter>
+        <App message="Custom Message!" />
+      </BrowserRouter>
+    );
+    const timeDisplay = await findByText(
+      /Current Time: \d{1,2}:\d{2}:\d{2} \w{2}/
+    );
+
+    expect(timeDisplay).toBeTruthy();
   });
 });

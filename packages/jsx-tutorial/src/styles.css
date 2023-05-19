@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/* Style for current time label */
+
+.time {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.5em 0;
+  color: #2196f3;
+}
