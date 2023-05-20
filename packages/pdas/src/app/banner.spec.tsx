@@ -7,4 +7,9 @@ describe('Banner', () => {
     const { baseElement } = render(<Banner />);
     expect(baseElement).toBeTruthy();
   });
+
+  it('should have a title', () => {
+    const { getByText } = render(<Banner />);
+    expect(getByText(/Personal Digital Assistants/)).toBeTruthy();
+  });
 });
