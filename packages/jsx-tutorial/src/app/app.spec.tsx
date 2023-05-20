@@ -45,14 +45,26 @@ describe('App', () => {
     expect(timeDisplay).toBeTruthy();
   });
 
-  it('should a number input', async () => {
+  it('should have a number input', async () => {
     const { findByRole } = render(
       <BrowserRouter>
-        <App message="Custom Message!" />
+        <App />
       </BrowserRouter>
     );
     const numberSelector = await findByRole('spinbutton');
 
     expect(numberSelector.getAttribute('type')).toBe('number');
+  });
+
+  it('should have a number input with minimum value of 1 and max value of 10', async () => {
+    const { findByRole } = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    const numberSelector = await findByRole('spinbutton');
+
+    expect(numberSelector.getAttribute('min')).toBe('1');
+    expect(numberSelector.getAttribute('max')).toBe('10');
   });
 });
