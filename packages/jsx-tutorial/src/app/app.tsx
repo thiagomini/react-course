@@ -6,6 +6,7 @@ export function App(props: { message?: string }) {
   return (
     <div>
       <h1>{message}</h1>
+      <input type="number" />
       <p className={styles.time}>
         {'Current Time: ' + new Date().toLocaleTimeString()}
       </p>

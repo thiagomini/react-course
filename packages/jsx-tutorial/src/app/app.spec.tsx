@@ -44,4 +44,15 @@ describe('App', () => {
 
     expect(timeDisplay).toBeTruthy();
   });
+
+  it('should a number input', async () => {
+    const { findByRole } = render(
+      <BrowserRouter>
+        <App message="Custom Message!" />
+      </BrowserRouter>
+    );
+    const numberSelector = await findByRole('spinbutton');
+
+    expect(numberSelector.getAttribute('type')).toBe('number');
+  });
 });
