@@ -2,11 +2,11 @@ export type ProfileCardProps = {
   title: string;
   handle: `@${string}`;
 };
-function ProfileCard(props: ProfileCardProps) {
+function ProfileCard({ title, handle }: ProfileCardProps) {
   return (
     <div>
-      <h3>{props.title}</h3>
-      <p>{props.handle}</p>
+      <h3>{title}</h3>
+      <p>{handle}</p>
     </div>
   );
 }
