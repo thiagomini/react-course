@@ -67,4 +67,15 @@ describe('App', () => {
     expect(numberSelector.getAttribute('min')).toBe('1');
     expect(numberSelector.getAttribute('max')).toBe('10');
   });
+
+  it('should have an autofocused text area', async () => {
+    const { findByRole } = render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+    const textArea = await findByRole('textbox');
+
+    expect(textArea).toHaveFocus();
+  });
 });
