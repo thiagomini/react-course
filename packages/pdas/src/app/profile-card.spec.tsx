@@ -33,4 +33,17 @@ describe('ProfileCard', () => {
 
     expect(getByAltText(/PDA Logo/)).toBeTruthy();
   });
+
+  test('custom description', () => {
+    const { getByText } = render(
+      <ProfileCard
+        title=""
+        handle="@"
+        image=""
+        description="Custom Description"
+      />
+    );
+
+    expect(getByText(/Custom Description/)).toBeTruthy();
+  });
 });
