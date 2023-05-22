@@ -1,7 +1,6 @@
 import Banner from './banner';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
 import ProfileCard from './profile-card';
+import 'bulma/css/bulma.css';
 
 import AlexaImage from '../assets/alexa.png';
 import CortanaImage from '../assets/cortana.png';
