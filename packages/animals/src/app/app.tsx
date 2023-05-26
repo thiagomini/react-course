@@ -16,7 +16,7 @@ export function App() {
       {animals.map((animal, index) => (
         <img
           key={index}
-          src="https://placeimg.com/640/480/animals"
+          src="https://picsum.photos/200/300"
           alt={`Animal ${animal}`}
         />
       ))}
