@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-
+import userEvent from '@testing-library/user-event';
 import App from './app';
 
 describe('App', () => {
@@ -8,8 +8,15 @@ describe('App', () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/Welcome animals/gi)).toBeTruthy();
+  test('adds an animal', async () => {
+    // Arrange
+    const { getByText, getAllByAltText } = render(<App />);
+    const button = getByText(/Add Animal/);
+
+    // Act
+    await userEvent.click(button);
+
+    // Assert
+    await expect(getAllByAltText(/Animal/gi)).toHaveLength(1);
   });
 });

@@ -3,18 +3,23 @@ import styles from './app.module.css';
 import { useState } from 'react';
 
 export function App() {
-  const increase = (num: number) => num + 1;
-  const handleClick = () => {
-    setCount(increase);
-  };
+  const [animals, setAnimals] = useState<string[]>([]);
 
-  const [count, setCount] = useState(0);
+  const handleClick = () => {
+    setAnimals([...animals, 'Animal']);
+  };
 
   return (
     <div>
       <p>Hello</p>
       <button onClick={handleClick}>Add Animal</button>
-      <div>Number of animals: {count}</div>
+      {animals.map((animal, index) => (
+        <img
+          key={index}
+          src="https://placeimg.com/640/480/animals"
+          alt={`Animal ${animal}`}
+        />
+      ))}
     </div>
   );
 }
