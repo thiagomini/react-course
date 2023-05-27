@@ -1,15 +1,24 @@
+import { Animal } from './animal-img-map';
 import AnimalShow from './animal-show';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
 import { useState } from 'react';
 
-const animals = ['cat', 'dog', 'cow', 'gator', 'horse', ' bird', 'heart'];
+const possibleAnimals: Animal[] = [
+  'cat',
+  'dog',
+  'cow',
+  'gator',
+  'horse',
+  'bird',
+];
 
-const randomAnimal = () => animals[Math.floor(Math.random() * animals.length)];
+const randomAnimal = () =>
+  possibleAnimals[Math.floor(Math.random() * possibleAnimals.length)];
 
 export function App() {
-  const [animals, setAnimals] = useState<string[]>([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
 
   const handleClick = () => {
     setAnimals([...animals, randomAnimal()]);

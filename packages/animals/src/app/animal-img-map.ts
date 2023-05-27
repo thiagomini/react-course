@@ -3,6 +3,7 @@ import catPath from '../assets/cat.svg';
 import cowPath from '../assets/cow.svg';
 import gatorPath from '../assets/gator.svg';
 import horsePath from '../assets/horse.svg';
+import dogPath from '../assets/dog.svg';
 
 export type Animal = 'cat' | 'dog' | 'cow' | 'gator' | 'horse' | 'bird';
 
@@ -13,6 +14,7 @@ export function imageForAnimal(animal: Animal) {
     cow: cowPath,
     gator: gatorPath,
     horse: horsePath,
+    dog: dogPath,
   };
 
   return svgMap[animal];

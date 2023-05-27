@@ -1,11 +1,15 @@
+import { Animal, imageForAnimal } from './animal-img-map';
+
 export type AnimalShowProps = {
-  type?: string;
+  type: Animal;
 };
 
 function AnimalShow({ type }: AnimalShowProps) {
+  const image = imageForAnimal(type);
+
   return (
     <div>
-      <img src="https://picsum.photos/200/300" alt={`Animal ${type}`} />
+      <img src={image} alt={`Animal ${type}`} />
     </div>
   );
 }

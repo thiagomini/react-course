@@ -3,6 +3,8 @@ import catPath from '../assets/cat.svg';
 import cowPath from '../assets/cow.svg';
 import gatorPath from '../assets/gator.svg';
 import horsePath from '../assets/horse.svg';
+import dogPath from '../assets/dog.svg';
+
 import { imageForAnimal } from './animal-img-map';
 
 describe('Animal image map', () => {
@@ -34,5 +36,11 @@ describe('Animal image map', () => {
     const horse = imageForAnimal('horse');
 
     expect(horse).toEqual(horsePath);
+  });
+
+  test('returns dog path', () => {
+    const dog = imageForAnimal('dog');
+
+    expect(dog).toEqual(dogPath);
   });
 });
