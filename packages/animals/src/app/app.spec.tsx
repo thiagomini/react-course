@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './app';
 
@@ -10,29 +10,30 @@ describe('App', () => {
 
   test('adds an animal', async () => {
     // Arrange
-    makeComponent();
+    const { getByText, getAllByAltText } = makeComponent();
+    const button = getByText(/Add Animal/);
 
     // Act
-    await dsl.animal.add();
+    await userEvent.click(button);
 
     // Assert
-    await dsl.animal.shouldBeVisible();
+    expect(getAllByAltText(/Animal/)).toHaveLength(1);
+  });
+
+  test('adds two animals', async () => {
+    // Arrange
+    const { getByText, getAllByAltText } = makeComponent();
+    const button = getByText(/Add Animal/);
+
+    // Act
+    await userEvent.click(button);
+    await userEvent.click(button);
+
+    // Assert
+    expect(getAllByAltText(/Animal/)).toHaveLength(2);
   });
 });
 
 function makeComponent() {
   return render(<App />);
 }
-
-const dsl = {
-  animal: {
-    async add() {
-      const button = screen.getByText(/Add Animal/);
-      await userEvent.click(button);
-    },
-
-    async shouldBeVisible() {
-      await expect(screen.getAllByAltText(/Animal/gi)).toHaveLength(1);
-    },
-  },
-};
