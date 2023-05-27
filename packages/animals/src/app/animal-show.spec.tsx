@@ -6,6 +6,12 @@ describe('Animal Show', () => {
     const { baseElement } = makeComponent();
     expect(baseElement).toBeTruthy();
   });
+
+  it('has an animal image', () => {
+    const { getByAltText } = makeComponent();
+
+    expect(getByAltText(/Animal/)).toBeTruthy();
+  });
 });
 
 function makeComponent() {
