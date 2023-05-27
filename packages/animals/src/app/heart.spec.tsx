@@ -1,4 +1,6 @@
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import heart from '../assets/heart.svg';
 import Heart from './heart';
 
@@ -16,6 +18,19 @@ describe('Heart', () => {
     // Assert
     const displayedImage = getByAltText(/Heart/) as HTMLImageElement;
     expect(displayedImage?.src).toContain(heart);
+  });
+
+  test('displays a bigger heart image on click', async () => {
+    // Arrange
+    const { getByAltText } = makeComponent();
+    const displayedImage = getByAltText(/Heart/) as HTMLImageElement;
+    const previousSize = displayedImage?.width;
+
+    // Act
+    await userEvent.click(displayedImage);
+
+    // Assert
+    expect(displayedImage?.width).toBeGreaterThan(previousSize);
   });
 });
 
