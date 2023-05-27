@@ -4,7 +4,7 @@ import AnimalShow from './animal-show';
 import styles from './app.module.css';
 import { useState } from 'react';
 
-const animals = ['cat', 'dog', 'cow', 'gator', 'fish', ' bird'];
+const animals = ['cat', 'dog', 'cow', 'gator', 'horse', ' bird', 'heart'];
 
 const randomAnimal = () => animals[Math.floor(Math.random() * animals.length)];
 
