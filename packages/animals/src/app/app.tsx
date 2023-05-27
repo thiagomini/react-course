@@ -15,13 +15,15 @@ export function App() {
     setAnimals([...animals, randomAnimal()]);
   };
 
+  const renderedAnimals = animals.map((animal, index) => (
+    <AnimalShow type={animal} key={index} />
+  ));
+
   return (
     <div>
       <p>Hello</p>
       <button onClick={handleClick}>Add Animal</button>
-      {animals.map((animal, index) => (
-        <AnimalShow type={animal} key={index} />
-      ))}
+      <div>{renderedAnimals}</div>
     </div>
   );
 }
