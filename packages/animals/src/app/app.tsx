@@ -1,3 +1,5 @@
+import AnimalShow from './animal-show';
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
 import { useState } from 'react';
@@ -18,11 +20,7 @@ export function App() {
       <p>Hello</p>
       <button onClick={handleClick}>Add Animal</button>
       {animals.map((animal, index) => (
-        <img
-          key={index}
-          src="https://picsum.photos/200/300"
-          alt={`Animal ${animal}`}
-        />
+        <AnimalShow type={animal} key={index} />
       ))}
     </div>
   );

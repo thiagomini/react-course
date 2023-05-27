@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import AnimalShow from './animal-show';
+import AnimalShow, { AnimalShowProps } from './animal-show';
 
 describe('Animal Show', () => {
   it('should render successfully', () => {
@@ -12,8 +12,14 @@ describe('Animal Show', () => {
 
     expect(getByAltText(/Animal/)).toBeTruthy();
   });
+
+  it('displays the given animal type', () => {
+    const { getByAltText } = makeComponent({ type: 'cat' });
+
+    expect(getByAltText(/Animal cat/)).toBeTruthy();
+  });
 });
 
-function makeComponent() {
-  return render(<AnimalShow />);
+function makeComponent(props: AnimalShowProps = { type: 'dog' }) {
+  return render(<AnimalShow {...props} />);
 }
