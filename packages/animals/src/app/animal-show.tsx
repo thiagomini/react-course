@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Animal, imageForAnimal } from './animal-img-map';
+import './animal-show.css';
 import heart from '../assets/heart.svg';
 
 export type AnimalShowProps = {
@@ -15,11 +16,11 @@ function AnimalShow({ type }: AnimalShowProps) {
     setClicks(clicks + 1);
   };
 
-
   return (
-    <div>
-      <img src={image} alt={`Animal ${type}`}  onClick={handleClick} />
+    <div className='animal-show'>
+      <img className='animal' src={image} alt={`Animal ${type}`}  onClick={handleClick} />
       <img
+        className='heart'
         src={heart}
         alt="Heart"
         width={10 + 10 * clicks}

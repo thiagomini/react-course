@@ -1,6 +1,6 @@
 import { Animal } from './animal-img-map';
 import AnimalShow from './animal-show';
-
+import './app.css';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './app.module.css';
 import { useState } from 'react';
@@ -29,10 +29,10 @@ export function App() {
   ));
 
   return (
-    <div>
+    <div className='app'>
       <p>Hello</p>
       <button onClick={handleClick}>Add Animal</button>
-      <div>{renderedAnimals}</div>
+      <div className='animal-list'>{renderedAnimals}</div>
     </div>
   );
 }
