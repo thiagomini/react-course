@@ -9,13 +9,21 @@ export type SearchBarProps = {
 function SearchBar({ onSubmit }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevents the page from trying to submit a request and reloading the page
+    onSubmit(searchTerm);
+  };
+
   return (
     <div>
-      <input
-        type="text"
-        onChange={(event) => setSearchTerm(event.target.value)}
-      />
-      <button onClick={() => onSubmit(searchTerm)}>Search</button>
+      <form onSubmit={handleOnSubmit}>
+        <input
+          value={searchTerm}
+          type="text"
+          onChange={(event) => setSearchTerm(event.target.value)}
+        />
+        <button>Search</button>
+      </form>
     </div>
   );
 }
