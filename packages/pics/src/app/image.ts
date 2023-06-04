@@ -1,5 +1,3 @@
-import { URL } from 'node:url';
-
 export type ImageProps = {
   id: string;
   url: string;

@@ -3,4 +3,7 @@
 
 export const environment = {
   production: false,
+  unsplash: {
+    accessToken: process.env.NX_UNSPLASH_ACCESS_TOKEN ?? '',
+  },
 };
