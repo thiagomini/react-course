@@ -1,4 +1,19 @@
 import { HttpClient } from './http-client.interface';
+import { Image } from '../app/image';
+
+export type UnsplashImage = {
+  id: string;
+  urls: {
+    regular: string;
+  };
+  alt_description: string;
+};
+
+export type UnsplashResponse = {
+  results: UnsplashImage[];
+  total: number;
+  total_pages: number;
+};
 
 export class UnsplashApi {
   constructor(
@@ -6,7 +21,7 @@ export class UnsplashApi {
     private readonly accessToken: string
   ) {}
   async searchImages(term: string) {
-    const response = await this.httpClient.send({
+    const response = await this.httpClient.send<UnsplashResponse>({
       url: `https://api.unsplash.com/search/photos?query=${term}`,
       method: 'GET',
       headers: {
@@ -14,6 +29,12 @@ export class UnsplashApi {
       },
     });
 
-    return response.body;
+    return response.body?.results.map((result: UnsplashImage) =>
+      Image.create({
+        id: result.id,
+        url: result.urls.regular,
+        alt: `image ${result.alt_description}`,
+      })
+    );
   }
 }
