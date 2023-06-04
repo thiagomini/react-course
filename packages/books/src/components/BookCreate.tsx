@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Book } from '../domain/book';
 
 export type BookCreateProps = {
-  handleSubmit: (title: string) => Book;
+  handleSubmit: (title: string) => unknown;
 };
 
 function BookCreate({ handleSubmit }: BookCreateProps) {
@@ -16,10 +15,11 @@ function BookCreate({ handleSubmit }: BookCreateProps) {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <label>Enter Book Title</label>
+        <label htmlFor="bookTitle">Enter Book Title</label>
         <input
           type="text"
           value={title}
+          id="bookTitle"
           onChange={(event) => setTitle(event.target.value)}
         />
       </form>
