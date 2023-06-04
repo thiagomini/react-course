@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Book, createBook } from '../domain/book';
 import BookCreate from '../components/BookCreate';
+import BookList from '../components/BookList';
 
 export function App() {
   const [books, setBooks] = useState<ReadonlyArray<Book>>([]);
@@ -10,14 +11,10 @@ export function App() {
     setBooks([...books, newBook]);
   };
 
-  const renderedBooks = books.map((book) => (
-    <li key={book.id}>{book.title}</li>
-  ));
-
   return (
     <div>
+      <BookList books={books} />
       <BookCreate handleSubmit={onBookSubmit} />
-      {renderedBooks}
     </div>
   );
 }

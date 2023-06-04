@@ -5,7 +5,7 @@ export type BookShowProps = {
 };
 
 function BookShow({ book }: BookShowProps) {
-  return <div>{book.title}</div>;
+  return <div className="book-show">{book.title}</div>;
 }
 
 export default BookShow;

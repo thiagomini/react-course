@@ -10,7 +10,7 @@ function BookList({ books }: BookListProps) {
     <BookShow book={book} key={book.id} />
   ));
 
-  return <div>{renderedBooks}</div>;
+  return <div className="book-list">{renderedBooks}</div>;
 }
 
 export default BookList;
