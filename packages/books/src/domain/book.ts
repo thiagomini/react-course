@@ -1,4 +1,4 @@
-import { randomUUID } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 export type Book = {
   id: string;
@@ -6,7 +6,7 @@ export type Book = {
 };
 
 export const createBook = (title: string): Book => ({
-  id: randomUUID(),
+  id: uuidv4(),
   title,
 });
 
