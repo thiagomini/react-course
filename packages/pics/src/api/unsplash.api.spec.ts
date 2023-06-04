@@ -34,14 +34,14 @@ describe('Unsplash API', () => {
         {
           id: '1',
           urls: {
-            regular: 'https://example.com/cat.png',
+            thumb: 'https://example.com/cat.png',
           },
           alt_description: 'A cat',
         },
         {
           id: '2',
           urls: {
-            regular: 'https://example.com/cat2.png',
+            thumb: 'https://example.com/cat2.png',
           },
           alt_description: 'Another cat',
         },

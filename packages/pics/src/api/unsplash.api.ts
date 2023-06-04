@@ -5,6 +5,7 @@ export type UnsplashImage = {
   id: string;
   urls: {
     regular: string;
+    thumb: string;
   };
   alt_description: string;
 };
@@ -32,7 +33,7 @@ export class UnsplashApi {
     return response.body?.results.map((result: UnsplashImage) =>
       Image.create({
         id: result.id,
-        url: result.urls.regular,
+        url: result.urls.thumb,
         alt: `image ${result.alt_description}`,
       })
     );
