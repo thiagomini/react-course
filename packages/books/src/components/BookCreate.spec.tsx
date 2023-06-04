@@ -23,6 +23,19 @@ describe('BookCreate', () => {
     // Assert
     expect(handleSubmit).toHaveBeenCalledWith('New Book Title');
   });
+
+  test('emtpies the input on submit', async () => {
+    // Arrange
+    const { getByRole } = makeComponent();
+    const input = getByRole('textbox');
+    await userEvent.type(input, 'New Book Title');
+
+    // Act
+    await userEvent.keyboard('{enter}');
+
+    // Assert
+    expect(input).toHaveValue('');
+  });
 });
 
 function makeComponent(

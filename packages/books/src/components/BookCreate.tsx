@@ -10,6 +10,7 @@ function BookCreate({ handleSubmit }: BookCreateProps) {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleSubmit(title);
+    setTitle('');
   };
 
   return (

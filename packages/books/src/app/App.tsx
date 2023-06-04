@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.css';
-
 import { useState } from 'react';
 import { Book, createBook } from '../domain/book';
 import BookCreate from '../components/BookCreate';
