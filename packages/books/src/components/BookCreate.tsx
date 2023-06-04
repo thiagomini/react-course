@@ -14,15 +14,18 @@ function BookCreate({ handleSubmit }: BookCreateProps) {
   };
 
   return (
-    <div>
+    <div className="book-create">
+      <h3>Add a Book</h3>
       <form onSubmit={onSubmit}>
         <label htmlFor="bookTitle">Enter Book Title</label>
         <input
+          className="input"
           type="text"
           value={title}
           id="bookTitle"
           onChange={(event) => setTitle(event.target.value)}
         />
+        <button className="button">Create!</button>
       </form>
     </div>
   );

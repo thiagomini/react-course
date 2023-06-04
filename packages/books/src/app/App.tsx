@@ -3,7 +3,7 @@ import { Book, createBook } from '../domain/book';
 import BookCreate from '../components/BookCreate';
 
 export function App() {
-  const [books, setBooks] = useState<Book[]>([]);
+  const [books, setBooks] = useState<ReadonlyArray<Book>>([]);
 
   const onBookSubmit = (title: string) => {
     const newBook = createBook(title);
