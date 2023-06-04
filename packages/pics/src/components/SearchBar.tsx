@@ -1,6 +1,4 @@
-// * Should send a request to the Unsplash API: GET https://api.unsplash.com/search/photos?query=SEARCH_TERM
-// * Headers => Authorization: 'Client-ID YOUR_ACCESS_KEY'
-
+import './SearchBar.css';
 import { useState } from 'react';
 
 export type SearchBarProps = {
@@ -15,14 +13,14 @@ function SearchBar({ onSubmit }: SearchBarProps) {
   };
 
   return (
-    <div>
+    <div className="search-bar">
       <form onSubmit={handleOnSubmit}>
+        <label>Enter Search Term</label>
         <input
           value={searchTerm}
           type="text"
           onChange={(event) => setSearchTerm(event.target.value)}
         />
-        <button>Search</button>
       </form>
     </div>
   );

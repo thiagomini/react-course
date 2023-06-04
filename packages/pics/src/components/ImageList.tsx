@@ -1,5 +1,6 @@
 import { Image } from '../app/image';
 import ImageShow from './ImageShow';
+import './ImageList.css';
 
 export type ImageListProps = {
   images: Image[];
@@ -7,7 +8,7 @@ export type ImageListProps = {
 
 function ImageList(props: ImageListProps) {
   return (
-    <div>
+    <div className="image-list">
       {props.images.map((image) => (
         <ImageShow image={image} key={image.id} />
       ))}
