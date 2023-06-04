@@ -1,4 +1,5 @@
 import { Book } from '../domain/book';
+import BookShow from './BookShow';
 
 export type BookListProps = {
   books: ReadonlyArray<Book>;
@@ -6,7 +7,7 @@ export type BookListProps = {
 
 function BookList({ books }: BookListProps) {
   const renderedBooks = books.map((book) => (
-    <div key={book.id}>{book.title}</div>
+    <BookShow book={book} key={book.id} />
   ));
 
   return <div>{renderedBooks}</div>;
