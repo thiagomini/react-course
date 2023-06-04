@@ -15,5 +15,7 @@ export const updateTitle = (book: Book, title: string): Book => ({
   title,
 });
 
-export const deleteBookById = (books: Book[], id: string): Book[] =>
-  books.filter((book) => book.id !== id);
+export const deleteBookById = (
+  books: ReadonlyArray<Book>,
+  id: string
+): Book[] => books.filter((book) => book.id !== id);

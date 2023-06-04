@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Book, createBook } from '../domain/book';
+import { Book, createBook, deleteBookById } from '../domain/book';
 import BookCreate from '../components/BookCreate';
 import BookList from '../components/BookList';
 
@@ -11,9 +11,14 @@ export function App() {
     setBooks([...books, newBook]);
   };
 
+  const onBookDelete = (bookId: string) => {
+    const updatedBooks = deleteBookById(books, bookId);
+    setBooks(updatedBooks);
+  };
+
   return (
     <div>
-      <BookList books={books} />
+      <BookList books={books} onDelete={onBookDelete} />
       <BookCreate handleSubmit={onBookSubmit} />
     </div>
   );
