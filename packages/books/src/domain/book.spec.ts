@@ -1,4 +1,4 @@
-import { Book, createBook, updateTitle } from './book';
+import { Book, createBook, deleteBookById, updateTitle } from './book';
 
 describe('Books', () => {
   test('create a book', () => {
@@ -35,5 +35,19 @@ describe('Books', () => {
       id: '1',
       title: 'The Lord of the Rings',
     });
+  });
+
+  test('delete a book by id', () => {
+    // Arrange
+    const books = [
+      createBook('The Hobbit'),
+      createBook('The Lord of the Rings'),
+    ];
+
+    // Act
+    const updatedBooks = deleteBookById(books, books[0].id);
+
+    // Assert
+    expect(updatedBooks).toEqual([books[1]]);
   });
 });

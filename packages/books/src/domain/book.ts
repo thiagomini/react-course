@@ -14,3 +14,6 @@ export const updateTitle = (book: Book, title: string): Book => ({
   ...book,
   title,
 });
+
+export const deleteBookById = (books: Book[], id: string): Book[] =>
+  books.filter((book) => book.id !== id);
