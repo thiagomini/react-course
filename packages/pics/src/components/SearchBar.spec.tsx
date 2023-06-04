@@ -12,12 +12,11 @@ describe('Search Bar', () => {
     // Arrange
     const mockFn = jest.fn();
     const { getByRole } = makeComponent(mockFn);
-    const button = getByRole('button');
     const input = getByRole('textbox');
 
     // Act
     await userEvent.type(input, 'search term');
-    await userEvent.click(button);
+    await userEvent.keyboard('{enter}');
 
     // Assert
     expect(mockFn).toHaveBeenCalledTimes(1);
