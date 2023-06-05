@@ -19,3 +19,16 @@ export const deleteBookById = (
   books: ReadonlyArray<Book>,
   id: string
 ): Book[] => books.filter((book) => book.id !== id);
+
+export const editBookById = (
+  books: ReadonlyArray<Book>,
+  id: string,
+  title: string
+): Book[] => {
+  const index = books.findIndex((book) => book.id === id);
+  if (index === -1) {
+    return [...books];
+  }
+  const updatedBook = updateTitle(books[index], title);
+  return [...books.slice(0, index), updatedBook, ...books.slice(index + 1)];
+};
