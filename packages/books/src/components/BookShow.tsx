@@ -10,7 +10,7 @@ function BookShow({ book, onDelete }: BookShowProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
-    setIsEditing(true);
+    setIsEditing(!isEditing);
   };
 
   const handleDelete = () => {

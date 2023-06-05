@@ -29,7 +29,7 @@ describe('Book Show', () => {
     expect(editInput).toBeInTheDocument();
   });
 
-  test('hides an the book title on edit button click', async () => {
+  test('hides the book title on edit button click', async () => {
     // Arrange
     const book = createBook('Title 1');
     const { getByRole, queryByText } = makeComponent(book);
@@ -41,6 +41,21 @@ describe('Book Show', () => {
     // Assert
     const bookTitle = queryByText('Title 1');
     expect(bookTitle).not.toBeInTheDocument();
+  });
+
+  test('shows the book title when clicking the edit button twice', async () => {
+    // Arrange
+    const book = createBook('Title 1');
+    const { getByRole, queryByText } = makeComponent(book);
+    const editButton = getByRole('button', { name: 'Edit' });
+
+    // Act
+    await userEvent.click(editButton);
+    await userEvent.click(editButton);
+
+    // Assert
+    const bookTitle = queryByText('Title 1');
+    expect(bookTitle).toBeInTheDocument();
   });
 });
 
