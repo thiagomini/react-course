@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Book } from '../domain/book';
+import BookEdit from './BookEdit';
 
 export type BookShowProps = {
   book: Book;
   onDelete?: (bookId: string) => void;
+  onEdit: (book: Book) => unknown;
 };
 
-function BookShow({ book, onDelete }: BookShowProps) {
+function BookShow({ book, onDelete, onEdit }: BookShowProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
@@ -19,11 +21,7 @@ function BookShow({ book, onDelete }: BookShowProps) {
     }
   };
 
-  const editComponent = (
-    <div>
-      <input type="text" value={book.title} onChange={(e) => console.log(e)} />
-    </div>
-  );
+  const editComponent = <BookEdit book={book} onEdit={onEdit} />;
 
   const content = isEditing ? editComponent : book.title;
 

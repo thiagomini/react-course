@@ -57,8 +57,28 @@ describe('Book Show', () => {
     const bookTitle = queryByText('Title 1');
     expect(bookTitle).toBeInTheDocument();
   });
+
+  test('calls the onEdit callback when the user submits the edit form', async () => {
+    // Arrange
+    const book = createBook('Title 1');
+    const onEdit = jest.fn();
+    const { getByRole } = makeComponent(book, onEdit);
+    const editButton = getByRole('button', { name: 'Edit' });
+    await userEvent.click(editButton);
+    const editInput = getByRole('textbox');
+    await userEvent.type(editInput, ' Modified', {});
+
+    // Act
+    await userEvent.keyboard('{enter}');
+
+    // Assert
+    expect(onEdit).toHaveBeenCalledWith({
+      id: book.id,
+      title: 'Title 1 Modified',
+    });
+  });
 });
 
-function makeComponent(book: Book) {
-  return render(<BookShow book={book} />);
+function makeComponent(book: Book, onEdit: (book: Book) => void = () => ({})) {
+  return render(<BookShow book={book} onEdit={onEdit} />);
 }
