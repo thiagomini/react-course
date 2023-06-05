@@ -28,6 +28,20 @@ describe('Book Show', () => {
     const editInput = queryByRole('textbox');
     expect(editInput).toBeInTheDocument();
   });
+
+  test('hides an the book title on edit button click', async () => {
+    // Arrange
+    const book = createBook('Title 1');
+    const { getByRole, queryByText } = makeComponent(book);
+    const editButton = getByRole('button', { name: 'Edit' });
+
+    // Act
+    await userEvent.click(editButton);
+
+    // Assert
+    const bookTitle = queryByText('Title 1');
+    expect(bookTitle).not.toBeInTheDocument();
+  });
 });
 
 function makeComponent(book: Book) {

@@ -25,9 +25,11 @@ function BookShow({ book, onDelete }: BookShowProps) {
     </div>
   );
 
+  const content = isEditing ? editComponent : book.title;
+
   return (
     <div className="book-show">
-      {book.title}
+      {content}
       <div className="actions">
         <button className="edit" onClick={handleEdit} name="Edit">
           Edit
@@ -35,7 +37,6 @@ function BookShow({ book, onDelete }: BookShowProps) {
         <button className="delete" onClick={handleDelete} name="Delete">
           Delete
         </button>
-        {isEditing && editComponent}
       </div>
     </div>
   );
