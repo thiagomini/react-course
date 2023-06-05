@@ -17,5 +17,5 @@ describe('Book List', () => {
 });
 
 function makeComponent(books: ReadonlyArray<Book>) {
-  return render(<BookList books={books} />);
+  return render(<BookList books={books} onUpdate={() => ({})} />);
 }

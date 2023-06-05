@@ -77,6 +77,24 @@ describe('Book Show', () => {
       title: 'Title 1 Modified',
     });
   });
+
+  test('closes the edit form when the user submits it', async () => {
+    // Arrange
+    const book = createBook('Title 1');
+    const onEdit = jest.fn();
+    const { getByRole, queryByLabelText } = makeComponent(book, onEdit);
+    const editButton = getByRole('button', { name: 'Edit' });
+    await userEvent.click(editButton);
+    const editInput = getByRole('textbox');
+    await userEvent.type(editInput, ' Modified', {});
+
+    // Act
+    await userEvent.keyboard('{enter}');
+
+    // Assert
+    const editInputAfterSubmit = queryByLabelText('Edit Book Title');
+    expect(editInputAfterSubmit).not.toBeInTheDocument();
+  });
 });
 
 function makeComponent(book: Book, onEdit: (book: Book) => void = () => ({})) {

@@ -15,16 +15,19 @@ function BookEdit({ book, onEdit }: BookEditProps) {
       id: book.id,
       title,
     });
+    // Closes itself
   };
 
   return (
     <div className="book-edit">
       <form onSubmit={handleSubmit}>
+        <label htmlFor="editBookTitle">Edit Book Title</label>
         <input
           className="input"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          id="editBookTitle"
         />
         <button className="button is-primary">Save</button>
       </form>

@@ -21,7 +21,12 @@ function BookShow({ book, onDelete, onEdit }: BookShowProps) {
     }
   };
 
-  const editComponent = <BookEdit book={book} onEdit={onEdit} />;
+  const wrappedOnEdit = (book: Book) => {
+    onEdit(book);
+    setIsEditing(false);
+  };
+
+  const editComponent = <BookEdit book={book} onEdit={wrappedOnEdit} />;
 
   const content = isEditing ? editComponent : book.title;
 
