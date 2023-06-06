@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import BookList from './BookList';
 import { Book, createBook } from '../domain/book';
+import { noop } from '@react-course/utils';
 
 describe('Book List', () => {
   test('renders a list of books', () => {
@@ -17,7 +18,5 @@ describe('Book List', () => {
 });
 
 function makeComponent(books: ReadonlyArray<Book>) {
-  return render(
-    <BookList books={books} onUpdate={() => ({})} onDelete={() => ({})} />
-  );
+  return render(<BookList books={books} onUpdate={noop} onDelete={noop} />);
 }

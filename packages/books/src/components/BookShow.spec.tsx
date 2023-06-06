@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import { Book, createBook } from '../domain/book';
 import BookShow from './BookShow';
 import userEvent from '@testing-library/user-event';
+import { noop } from '@react-course/utils';
 
 describe('Book Show', () => {
   test('renders a book', () => {
@@ -98,5 +99,5 @@ describe('Book Show', () => {
 });
 
 function makeComponent(book: Book, onEdit: (book: Book) => void = () => ({})) {
-  return render(<BookShow book={book} onEdit={onEdit} />);
+  return render(<BookShow book={book} onEdit={onEdit} onDelete={noop} />);
 }
