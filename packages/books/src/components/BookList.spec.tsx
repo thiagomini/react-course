@@ -17,5 +17,7 @@ describe('Book List', () => {
 });
 
 function makeComponent(books: ReadonlyArray<Book>) {
-  return render(<BookList books={books} onUpdate={() => ({})} />);
+  return render(
+    <BookList books={books} onUpdate={() => ({})} onDelete={() => ({})} />
+  );
 }

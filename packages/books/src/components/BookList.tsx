@@ -3,7 +3,7 @@ import BookShow from './BookShow';
 
 export type BookListProps = {
   books: ReadonlyArray<Book>;
-  onDelete?: (bookId: string) => void;
+  onDelete: (bookId: string) => void;
   onUpdate: (book: Book) => unknown;
 };
 

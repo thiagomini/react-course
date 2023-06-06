@@ -15,7 +15,6 @@ function BookEdit({ book, onEdit }: BookEditProps) {
       id: book.id,
       title,
     });
-    // Closes itself
   };
 
   return (

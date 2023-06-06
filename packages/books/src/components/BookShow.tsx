@@ -4,7 +4,7 @@ import BookEdit from './BookEdit';
 
 export type BookShowProps = {
   book: Book;
-  onDelete?: (bookId: string) => void;
+  onDelete: (bookId: string) => void;
   onEdit: (book: Book) => unknown;
 };
 
@@ -21,12 +21,12 @@ function BookShow({ book, onDelete, onEdit }: BookShowProps) {
     }
   };
 
-  const wrappedOnEdit = (book: Book) => {
+  const handleSubmit = (book: Book) => {
     onEdit(book);
     setIsEditing(false);
   };
 
-  const editComponent = <BookEdit book={book} onEdit={wrappedOnEdit} />;
+  const editComponent = <BookEdit book={book} onEdit={handleSubmit} />;
 
   const content = isEditing ? editComponent : book.title;
 
