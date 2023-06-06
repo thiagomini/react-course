@@ -96,6 +96,19 @@ describe('Book Show', () => {
     const editInputAfterSubmit = queryByLabelText('Edit Book Title');
     expect(editInputAfterSubmit).not.toBeInTheDocument();
   });
+
+  test('shows an image', async () => {
+    // Arrange
+    const book = createBook('Title 1');
+    const onEdit = jest.fn();
+    const { getByAltText } = makeComponent(book, onEdit);
+
+    // Act
+    const image = getByAltText('Book Cover');
+
+    // Assert
+    expect(image).toBeInTheDocument();
+  });
 });
 
 function makeComponent(book: Book, onEdit: (book: Book) => void = () => ({})) {

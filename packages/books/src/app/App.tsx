@@ -23,6 +23,7 @@ export function App() {
 
   return (
     <div>
+      <h1>Reading List</h1>
       <BookList books={books} onDelete={onBookDelete} onUpdate={onBookUpdate} />
       <BookCreate handleSubmit={onBookSubmit} />
     </div>
