@@ -7,7 +7,7 @@ import {
 } from './book';
 
 describe('Books', () => {
-  test('create a book', () => {
+  test('create a new book', () => {
     // Act
     const newBook = createBook('The Hobbit');
 
