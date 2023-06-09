@@ -62,5 +62,10 @@ export class BooksApi {
       title: book.title,
     }))
   }
+
+  public async unsafeDeleteAll(): Promise<void> {
+    const allBooks = await this.getAll();
+    await Promise.all(allBooks.map((book) => this.deleteById(book.id)));
+  }
   
 }

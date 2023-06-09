@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Book, deleteBookById, editBookById } from '../domain/book';
 import BookCreate from '../components/BookCreate';
 import BookList from '../components/BookList';
@@ -10,6 +10,10 @@ export type AppProps = {
 
 export function App({ booksApi }: AppProps) {
   const [books, setBooks] = useState<ReadonlyArray<Book>>([]);
+
+  useEffect(() => {
+    booksApi.getAll().then(setBooks);
+  }, [booksApi])
 
   const onBookSubmit = async (title: string) => {   
     const newBook = await booksApi.create(title);

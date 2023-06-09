@@ -5,10 +5,27 @@ import App from './App';
 import { HttpClientAxios } from '@react-course/utils';
 import { BooksApi } from '../data/books.api';
 
+const booksApi = new BooksApi(new HttpClientAxios());
+
+
 describe('App', () => {
+
+  beforeEach(async () => {
+    await booksApi.unsafeDeleteAll();
+  });
+
   it('should render successfully', () => {
     const { baseElement } = makeComponent();
     expect(baseElement).toBeTruthy();
+  });
+
+  test('loads existing books from the api', async () => {
+    // Arrange
+    await booksApi.create('Existing Book Title');
+    const { queryByText } = makeComponent();
+
+    // Act & Assert
+    await waitFor(() => expect(queryByText('Existing Book Title')).toBeInTheDocument());
   });
 
   test('adds a book when the user submits the form', async () => {
@@ -62,7 +79,5 @@ describe('App', () => {
 });
 
 function makeComponent() {
-  const booksApi = new BooksApi(new HttpClientAxios());
-
   return render(<App booksApi={booksApi} />);
 }
