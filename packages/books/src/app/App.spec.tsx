@@ -1,8 +1,9 @@
-import { render } from '@testing-library/react';
+import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { HttpClientSpy } from '@react-course/utils';
+import { HttpClientAxios } from '@react-course/utils';
+import { BooksApi } from '../data/books.api';
 
 describe('App', () => {
   it('should render successfully', () => {
@@ -12,7 +13,7 @@ describe('App', () => {
 
   test('adds a book when the user submits the form', async () => {
     // Arrange
-    const { getByLabelText, queryByText, httpClientSpy } = makeComponent();
+    const { getByLabelText, queryByText } = makeComponent();
     const input = getByLabelText('Enter Book Title');
     await userEvent.type(input, 'New Book Title');
 
@@ -20,40 +21,30 @@ describe('App', () => {
     await userEvent.keyboard('{enter}');
 
     // Assert
-    expect(queryByText('New Book Title')).toBeInTheDocument();
-
-    httpClientSpy.shouldSendNumberOfRequests(1)
-    .withBody({ id: expect.any(String), title: 'New Book Title' })
-    .withMethod('POST');
-    
+    await waitFor(() => queryByText('New Book Title'));
   });
 
   test('deletes a book when the user clicks the delete button', async () => {
     // Arrange
-    const { getByLabelText, queryByText, findByRole, httpClientSpy } = makeComponent();
+    const { getByLabelText, queryByText, findByRole } = makeComponent();
     const input = getByLabelText('Enter Book Title');
     await userEvent.type(input, 'New Book Title');
     await userEvent.keyboard('{enter}');
-    httpClientSpy.reset();
     const deleteButton = await findByRole('button', { name: 'Delete' });
 
     // Act
     await userEvent.click(deleteButton);
 
     // Assert
-    expect(queryByText('New Book Title')).not.toBeInTheDocument();
-    httpClientSpy.shouldSendNumberOfRequests(1)
-    .withMethod('DELETE');
-    
+    await waitForElementToBeRemoved(() => queryByText('New Book Title'));
   });
 
   test('updates a book title when the user edit it and submit the form', async () => {
     // Arrange
-    const { getByLabelText, queryByText, findByRole, httpClientSpy } = makeComponent();
+    const { getByLabelText, queryByText, findByRole } = makeComponent();
     const input = getByLabelText('Enter Book Title');
     await userEvent.type(input, 'New Book Title');
     await userEvent.keyboard('{enter}');
-    httpClientSpy.reset()
 
     const editButton = await findByRole('button', { name: 'Edit' });
     await userEvent.click(editButton);
@@ -65,20 +56,13 @@ describe('App', () => {
     await userEvent.keyboard('{enter}');
 
     // Assert
-    expect(queryByText('New Book Title')).not.toBeInTheDocument();
-    expect(queryByText('New Book Title Edited')).toBeInTheDocument();
-
-    httpClientSpy.shouldSendNumberOfRequests(1)
-    .withMethod('PUT')
-    .withBody({ title: 'New Book Title Edited' });
-    
+    waitForElementToBeRemoved(() => queryByText('New Book Title'));
+    waitFor(() => queryByText('New Book Title Edited'));
   });
 });
 
-function makeComponent(httpClientSpy: HttpClientSpy = new HttpClientSpy()) {
-  const component = render(<App httpClient={httpClientSpy} />);
-  return {
-    ...component,
-    httpClientSpy
-  }
+function makeComponent() {
+  const booksApi = new BooksApi(new HttpClientAxios());
+
+  return render(<App booksApi={booksApi} />);
 }

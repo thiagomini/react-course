@@ -1,24 +1,18 @@
 import { useState } from 'react';
-import { Book, createBook, deleteBookById, editBookById } from '../domain/book';
+import { Book, deleteBookById, editBookById } from '../domain/book';
 import BookCreate from '../components/BookCreate';
 import BookList from '../components/BookList';
-import { HttpClient } from '@react-course/utils';
+import { BooksApi } from '../data/books.api';
 
 export type AppProps = {
-  httpClient: HttpClient;
+  booksApi: BooksApi;
 }
 
-export function App({ httpClient }: AppProps) {
+export function App({ booksApi }: AppProps) {
   const [books, setBooks] = useState<ReadonlyArray<Book>>([]);
 
-  const onBookSubmit = async (title: string) => {
-    const newBook = createBook(title);
-    
-    await httpClient.send({
-      method: 'POST',
-      url: 'http://localhost:3001/books',
-      body: { ...newBook }
-    })
+  const onBookSubmit = async (title: string) => {   
+    const newBook = await booksApi.create(title);
 
     setBooks([...books, newBook]);
   };
@@ -26,10 +20,7 @@ export function App({ httpClient }: AppProps) {
   const onBookDelete = async (bookId: string) => {
     const updatedBooks = deleteBookById(books, bookId);
 
-    await httpClient.send({
-      method: 'DELETE',
-      url: `http://localhost:3001/books/${bookId}`
-    })
+    await booksApi.deleteById(bookId);
 
     setBooks(updatedBooks);
   };
@@ -37,13 +28,7 @@ export function App({ httpClient }: AppProps) {
   const onBookUpdate = async (book: Book) => {
     const updatedBooks = editBookById(books, book.id, book.title);
 
-    await httpClient.send({
-      method: 'PUT',
-      url: `http://localhost:3001/books/${book.id}`,
-      body: { 
-        title: book.title
-       }
-    })
+    await booksApi.updateById(book.id, book.title);
 
     setBooks(updatedBooks);
   };
