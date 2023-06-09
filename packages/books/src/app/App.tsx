@@ -2,22 +2,49 @@ import { useState } from 'react';
 import { Book, createBook, deleteBookById, editBookById } from '../domain/book';
 import BookCreate from '../components/BookCreate';
 import BookList from '../components/BookList';
+import { HttpClient } from '@react-course/utils';
 
-export function App() {
+export type AppProps = {
+  httpClient: HttpClient;
+}
+
+export function App({ httpClient }: AppProps) {
   const [books, setBooks] = useState<ReadonlyArray<Book>>([]);
 
-  const onBookSubmit = (title: string) => {
+  const onBookSubmit = async (title: string) => {
     const newBook = createBook(title);
+    
+    await httpClient.send({
+      method: 'POST',
+      url: 'http://localhost:3001/books',
+      body: { ...newBook }
+    })
+
     setBooks([...books, newBook]);
   };
 
-  const onBookDelete = (bookId: string) => {
+  const onBookDelete = async (bookId: string) => {
     const updatedBooks = deleteBookById(books, bookId);
+
+    await httpClient.send({
+      method: 'DELETE',
+      url: `http://localhost:3001/books/${bookId}`
+    })
+
     setBooks(updatedBooks);
   };
 
-  const onBookUpdate = (book: Book) => {
+  const onBookUpdate = async (book: Book) => {
     const updatedBooks = editBookById(books, book.id, book.title);
+
+    await httpClient.send({
+      method: 'PUT',
+      url: `http://localhost:3001/books/${book.id}`,
+      body: { 
+        title: book.title
+       }
+    })
+
     setBooks(updatedBooks);
   };
 

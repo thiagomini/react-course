@@ -2,7 +2,7 @@ import {
   HttpClient,
   HttpRequest,
   HttpResponse,
-} from '../http-client.interface';
+} from './http-client.interface';
 
 export class HttpClientSpy implements HttpClient {
   private readonly requests: HttpRequest[] = [];
@@ -20,6 +20,10 @@ export class HttpClientSpy implements HttpClient {
 
     this.requests.push(request);
     return Promise.resolve(response) as TResponse;
+  }
+
+  public reset() {
+    this.requests.length = 0;
   }
 
   public setResponse(responseBody: unknown, responseStatus = 200): void {
