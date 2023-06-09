@@ -21,7 +21,7 @@ describe('App', () => {
     await userEvent.keyboard('{enter}');
 
     // Assert
-    await waitFor(() => queryByText('New Book Title'));
+    await waitFor(() => expect(queryByText('New Book Title')).toBeInTheDocument());
   });
 
   test('deletes a book when the user clicks the delete button', async () => {
@@ -57,7 +57,7 @@ describe('App', () => {
 
     // Assert
     waitForElementToBeRemoved(() => queryByText('New Book Title'));
-    waitFor(() => queryByText('New Book Title Edited'));
+    waitFor(() => expect(queryByText('New Book Title Edited')).toBeInTheDocument());
   });
 });
 
