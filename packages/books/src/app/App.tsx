@@ -30,9 +30,9 @@ export function App({ booksApi }: AppProps) {
   };
 
   const onBookUpdate = async (book: Book) => {
-    const updatedBooks = editBookById(books, book.id, book.title);
+    const updatedBook = await booksApi.updateById(book.id, book.title);
 
-    await booksApi.updateById(book.id, book.title);
+    const updatedBooks = editBookById(books, updatedBook.id, updatedBook.title);
 
     setBooks(updatedBooks);
   };
