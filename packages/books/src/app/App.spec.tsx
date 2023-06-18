@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import App from './App';
 import { HttpClientAxios } from '@react-course/utils';
 import { BooksApi } from '../data/books.api';
+import { Provider } from '../context/book.context';
 
 const booksApi = new BooksApi(new HttpClientAxios());
 
@@ -79,5 +80,9 @@ describe('App', () => {
 });
 
 function makeComponent() {
-  return render(<App booksApi={booksApi} />);
+  return render(
+  <Provider booksApi={booksApi}>
+      <App />
+  </Provider>
+  );
 }
