@@ -1,17 +1,14 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Book } from '../domain/book';
+import useBooksContext from '../hooks/use-books-context.hook';
 import BookEdit from './BookEdit';
-import BookContext, { BookContextType } from '../context/book.context';
 
 export type BookShowProps = {
   book: Book;
 };
 
 function BookShow({ book }: BookShowProps) {
-  const {
-    deleteBook,
-    updateBook,
-  } = useContext(BookContext) as BookContextType
+  const { deleteBook, updateBook } = useBooksContext();
 
   const [isEditing, setIsEditing] = useState(false);
 
