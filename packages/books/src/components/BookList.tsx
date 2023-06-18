@@ -1,16 +1,14 @@
-import { Book } from '../domain/book';
+import { useContext } from 'react';
+import BookContext, { BookContextType } from '../context/book.context';
 import BookShow from './BookShow';
 
-export type BookListProps = {
-  books: ReadonlyArray<Book>;
-  onDelete: (bookId: string) => void;
-  onUpdate: (book: Book) => unknown;
-};
 
-function BookList({ books, onDelete, onUpdate }: BookListProps) {
+
+function BookList() {
+  const { books } = useContext(BookContext) as BookContextType
 
   const renderedBooks = books.map((book) => (
-    <BookShow book={book} key={book.id} onDelete={onDelete} onEdit={onUpdate} />
+    <BookShow book={book} key={book.id}/>
   ));
 
   return (

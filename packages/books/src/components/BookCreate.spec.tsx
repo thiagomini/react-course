@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from '../context/book.context';
 import BookCreate from './BookCreate';
@@ -13,7 +13,7 @@ describe('BookCreate', () => {
   test('renders', () => {
     const { baseElement } = makeComponent();
 
-    expect(baseElement).toBeInTheDocument();
+    waitFor(() => expect(baseElement).toBeInTheDocument());
   });
 
   test('create new book on submit', async () => {

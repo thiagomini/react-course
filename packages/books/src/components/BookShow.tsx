@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Book } from '../domain/book';
 import BookEdit from './BookEdit';
+import BookContext, { BookContextType } from '../context/book.context';
 
 export type BookShowProps = {
   book: Book;
-  onDelete: (bookId: string) => void;
-  onEdit: (book: Book) => unknown;
 };
 
-function BookShow({ book, onDelete, onEdit }: BookShowProps) {
+function BookShow({ book }: BookShowProps) {
+  const {
+    deleteBook,
+    updateBook,
+  } = useContext(BookContext) as BookContextType
+
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
@@ -16,13 +20,11 @@ function BookShow({ book, onDelete, onEdit }: BookShowProps) {
   };
 
   const handleDelete = () => {
-    if (onDelete) {
-      onDelete(book.id);
-    }
+    deleteBook(book.id);
   };
 
   const handleSubmit = (book: Book) => {
-    onEdit(book);
+    updateBook(book);
     setIsEditing(false);
   };
 

@@ -1,8 +1,10 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { Book, createBook } from '../domain/book';
 import BookShow from './BookShow';
 import userEvent from '@testing-library/user-event';
-import { noop } from '@react-course/utils';
+import { mockDeep } from 'jest-mock-extended';
+import { BooksApi } from '../data/books.api.interface';
+import { Provider } from '../context/book.context';
 
 describe('Book Show', () => {
   test('renders a book', () => {
@@ -10,10 +12,10 @@ describe('Book Show', () => {
     const book = createBook('Title 1');
 
     // Act
-    const { getByText } = makeComponent(book);
+    const { queryByText } = makeComponent(book);
 
     // Assert
-    expect(getByText('Title 1')).toBeInTheDocument();
+    waitFor(() => expect(queryByText('Title 1')).toBeInTheDocument());
   });
 
   test('shows an edit input on edit button click', async () => {
@@ -59,11 +61,10 @@ describe('Book Show', () => {
     expect(bookTitle).toBeInTheDocument();
   });
 
-  test('calls the onEdit callback when the user submits the edit form', async () => {
+  test('calls the updateBook method when the user submits the edit form', async () => {
     // Arrange
     const book = createBook('Title 1');
-    const onEdit = jest.fn();
-    const { getByRole } = makeComponent(book, onEdit);
+    const { getByRole, booksApi } = makeComponent(book);
     const editButton = getByRole('button', { name: 'Edit' });
     await userEvent.click(editButton);
     const editInput = getByRole('textbox');
@@ -73,17 +74,13 @@ describe('Book Show', () => {
     await userEvent.keyboard('{enter}');
 
     // Assert
-    expect(onEdit).toHaveBeenCalledWith({
-      id: book.id,
-      title: 'Title 1 Modified',
-    });
+    expect(booksApi.updateById).toHaveBeenCalledWith(book.id, 'Title 1 Modified');
   });
 
   test('closes the edit form when the user submits it', async () => {
     // Arrange
     const book = createBook('Title 1');
-    const onEdit = jest.fn();
-    const { getByRole, queryByLabelText } = makeComponent(book, onEdit);
+    const { getByRole, queryByLabelText } = makeComponent(book);
     const editButton = getByRole('button', { name: 'Edit' });
     await userEvent.click(editButton);
     const editInput = getByRole('textbox');
@@ -100,17 +97,29 @@ describe('Book Show', () => {
   test('shows an image', async () => {
     // Arrange
     const book = createBook('Title 1');
-    const onEdit = jest.fn();
-    const { getByAltText } = makeComponent(book, onEdit);
+    const { getByAltText } = makeComponent(book);
 
     // Act
     const image = getByAltText('Book Cover');
 
     // Assert
-    expect(image).toBeInTheDocument();
+    waitFor(() => expect(image).toBeInTheDocument());
   });
 });
 
-function makeComponent(book: Book, onEdit: (book: Book) => void = () => ({})) {
-  return render(<BookShow book={book} onEdit={onEdit} onDelete={noop} />);
+function makeComponent(book: Book) {
+  const booksApiMock = mockDeep<BooksApi>();
+  booksApiMock.getAll.mockResolvedValue([]);
+  booksApiMock.updateById.mockResolvedValue(book);
+  
+  const component = render(
+    <Provider booksApi={booksApiMock}>
+      <BookShow book={book}/>
+    </Provider>
+  );
+
+  return {
+    ...component,
+    booksApi: booksApiMock,
+  }
 }

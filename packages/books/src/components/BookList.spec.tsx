@@ -1,7 +1,11 @@
-import { render } from '@testing-library/react';
-import BookList from './BookList';
+import { render, waitFor } from '@testing-library/react';
+import { Provider } from '../context/book.context';
 import { Book, createBook } from '../domain/book';
-import { noop } from '@react-course/utils';
+import BookList from './BookList';
+import { mockDeep } from 'jest-mock-extended';
+import { BooksApi } from '../data/books.api.interface';
+
+const booksApi = mockDeep<BooksApi>();
 
 describe('Book List', () => {
   test('renders a list of books', () => {
@@ -9,14 +13,19 @@ describe('Book List', () => {
     const books = [createBook('Title 1'), createBook('Title 2')];
 
     // Act
-    const { getByText } = makeComponent(books);
+    const { queryByText } = makeComponent(books);
 
     // Assert
-    expect(getByText('Title 1')).toBeInTheDocument();
-    expect(getByText('Title 2')).toBeInTheDocument();
+    waitFor(() => expect(queryByText('Title 1')).toBeInTheDocument());
+    waitFor(() => expect(queryByText('Title 2')).toBeInTheDocument());
   });
 });
 
-function makeComponent(books: ReadonlyArray<Book>) {
-  return render(<BookList books={books} onUpdate={noop} onDelete={noop} />);
+function makeComponent(books: Book[] = []) {
+  booksApi.getAll.mockResolvedValue(books);
+  return render(
+    <Provider booksApi={booksApi}>
+      <BookList/>
+    </Provider>
+  );
 }
