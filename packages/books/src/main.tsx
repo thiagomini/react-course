@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import App from './app/App';
 import { Provider } from './context/book.context';
-import { BooksApi } from './data/books.api';
+import { HttpBooksApi } from './data/http-books.api';
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 );
 
 const httpClient = new HttpClientAxios();
-const booksApi = new BooksApi(httpClient);
+const booksApi = new HttpBooksApi(httpClient);
 root.render(
   <StrictMode>
     <Provider booksApi={booksApi}>

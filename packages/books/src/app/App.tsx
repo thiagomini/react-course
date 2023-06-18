@@ -6,7 +6,6 @@ import BookContext, { BookContextType } from '../context/book.context';
 export function App() {
   const {
     books,
-    createBook,
     deleteBook,
     updateBook,
   } = useContext(BookContext) as BookContextType
@@ -15,7 +14,7 @@ export function App() {
     <div>
       <h1>Reading List</h1>
       <BookList books={books} onDelete={deleteBook} onUpdate={updateBook} />
-      <BookCreate handleSubmit={createBook} />
+      <BookCreate/>
     </div>
   );
 }

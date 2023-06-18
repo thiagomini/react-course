@@ -1,12 +1,12 @@
 import { HttpClientSpy } from "@react-course/utils";
-import { BooksApi } from './books.api';
+import { HttpBooksApi } from './http-books.api';
 import { createBook } from "../domain/book";
 
-describe('Books API', () => {
+describe('Http Books API', () => {
   test('creates a new book', async () => {
     // Arrange
     const httpClient = new HttpClientSpy();
-    const booksApi = new BooksApi(httpClient);
+    const booksApi = new HttpBooksApi(httpClient);
 
     // Act
     await booksApi.create('The Lord of the Rings');
@@ -21,7 +21,7 @@ describe('Books API', () => {
   test('updates an existing book', async () => {
     // Arrange
     const httpClient = new HttpClientSpy();
-    const booksApi = new BooksApi(httpClient);
+    const booksApi = new HttpBooksApi(httpClient);
 
     // Act
     await booksApi.updateById('1', 'The Lord of the Rings');
@@ -36,7 +36,7 @@ describe('Books API', () => {
   test('deletes an existing book by id', async () => {
     // Arrange
     const httpClient = new HttpClientSpy();
-    const booksApi = new BooksApi(httpClient);
+    const booksApi = new HttpBooksApi(httpClient);
 
     // Act
     await booksApi.deleteById('1');
@@ -54,7 +54,7 @@ describe('Books API', () => {
       createBook('Book 1'),
       createBook('Book 2'),
     ])
-    const booksApi = new BooksApi(httpClient);
+    const booksApi = new HttpBooksApi(httpClient);
 
     // Act
     await booksApi.getAll();

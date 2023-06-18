@@ -3,10 +3,10 @@ import { render, waitFor, waitForElementToBeRemoved } from '@testing-library/rea
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { HttpClientAxios } from '@react-course/utils';
-import { BooksApi } from '../data/books.api';
+import { HttpBooksApi } from '../data/http-books.api';
 import { Provider } from '../context/book.context';
 
-const booksApi = new BooksApi(new HttpClientAxios());
+const booksApi = new HttpBooksApi(new HttpClientAxios());
 
 
 describe('App', () => {

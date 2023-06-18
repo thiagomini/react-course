@@ -32,3 +32,8 @@ export const editBookById = (
   const updatedBook = updateTitle(books[index], title);
   return [...books.slice(0, index), updatedBook, ...books.slice(index + 1)];
 };
+
+export const getBookById = (books: Book[], id: string, ): Book | undefined => {
+  const book = books.find((book) => book.id === id);
+  return book;
+}

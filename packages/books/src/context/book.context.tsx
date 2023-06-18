@@ -1,7 +1,8 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { Book, deleteBookById, editBookById } from '../domain/book';
-import { BooksApi } from '../data/books.api';
 import { HttpClientAxios } from '@react-course/utils';
+import React, { createContext, useEffect, useState } from 'react';
+import { BooksApi } from '../data/books.api.interface';
+import { HttpBooksApi } from '../data/http-books.api';
+import { Book, deleteBookById, editBookById } from '../domain/book';
 
 export type BookContextType = {
   books: ReadonlyArray<Book>;
@@ -18,7 +19,7 @@ export type BookContextProps = React.PropsWithChildren & {
 
 function createBooksApi() {
  const httpClient = new HttpClientAxios();
-  return new BooksApi(httpClient);
+  return new HttpBooksApi(httpClient);
 }
 
 export function Provider({ children, booksApi = createBooksApi() }: BookContextProps) {

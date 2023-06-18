@@ -1,7 +1,8 @@
 import { HttpClient } from '@react-course/utils';
 import { Book, createBook } from '../domain/book';
+import { BooksApi } from './books.api.interface';
 
-export class BooksApi {
+export class HttpBooksApi implements BooksApi {
   constructor(private readonly httpClient: HttpClient) {}
 
   public async create(title: string): Promise<Book> {

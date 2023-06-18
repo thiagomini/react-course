@@ -1,8 +1,10 @@
+import { v4 } from 'uuid';
 import {
   Book,
   createBook,
   deleteBookById,
   editBookById,
+  getBookById,
   updateTitle,
 } from './book';
 
@@ -72,5 +74,34 @@ describe('Books', () => {
       { id: books[0].id, title: 'The Hobbit 2' },
       books[1],
     ]);
+  });
+
+  test('find a book by id', () => {
+    // Arrange
+    const books = [
+      createBook('The Hobbit'),
+      createBook('The Lord of the Rings'),
+    ];
+    const book2 = books[1];
+
+    // Act
+    const secondBookById = getBookById(books, book2.id);
+
+    // Assert
+    expect(secondBookById).toEqual(book2);
+  });
+  
+  test('does not find a book by id', () => {
+    // Arrange
+    const books = [
+      createBook('The Hobbit'),
+      createBook('The Lord of the Rings'),
+    ];
+
+    // Act
+    const nonexistentBook = getBookById(books, v4());
+
+    // Assert
+    expect(nonexistentBook).toBeUndefined();
   });
 });

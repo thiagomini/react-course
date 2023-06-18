@@ -1,9 +1,15 @@
 import { render } from '@testing-library/react';
-import { Book, createBook } from '../domain/book';
-import BookCreate from './BookCreate';
 import userEvent from '@testing-library/user-event';
+import { Provider } from '../context/book.context';
+import BookCreate from './BookCreate';
+import { mockDeep } from 'jest-mock-extended'
+import { BooksApi } from '../data/books.api.interface';
+
+const mockedBooksApi = mockDeep<BooksApi>();
+mockedBooksApi.getAll.mockResolvedValue([]);
 
 describe('BookCreate', () => {
+
   test('renders', () => {
     const { baseElement } = makeComponent();
 
@@ -12,8 +18,7 @@ describe('BookCreate', () => {
 
   test('create new book on submit', async () => {
     // Arrange
-    const handleSubmit = jest.fn();
-    const { getByRole } = makeComponent(handleSubmit);
+    const { getByRole } = makeComponent();
     const input = getByRole('textbox');
     await userEvent.type(input, 'New Book Title');
 
@@ -21,10 +26,10 @@ describe('BookCreate', () => {
     await userEvent.keyboard('{enter}');
 
     // Assert
-    expect(handleSubmit).toHaveBeenCalledWith('New Book Title');
+    expect(mockedBooksApi.create).toHaveBeenCalledWith('New Book Title');
   });
 
-  test('emtpies the input on submit', async () => {
+  test('empties the input on submit', async () => {
     // Arrange
     const { getByRole } = makeComponent();
     const input = getByRole('textbox');
@@ -38,12 +43,12 @@ describe('BookCreate', () => {
   });
 });
 
-function makeComponent(
-  handleSubmit: (title: string) => Book = makeStubHandleSubmit()
-) {
-  return render(<BookCreate handleSubmit={handleSubmit} />);
+function makeComponent() {
+  return render(
+    <Provider booksApi={mockedBooksApi}>
+      <BookCreate />
+    </Provider>
+  );
 }
 
-function makeStubHandleSubmit() {
-  return () => createBook('title');
-}
+
