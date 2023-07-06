@@ -6,16 +6,25 @@ export function App() {
   return (
     <div>
       <div>
-        <Button></Button>
+        <Button>Button 1</Button>
       </div>
       <div>
-        <Button></Button>
+        <Button danger outline>
+          Button 2
+        </Button>
       </div>
       <div>
-        <Button></Button>
+        <Button warning>Button 3</Button>
       </div>
       <div>
-        <Button></Button>
+        <Button secondary outline>
+          Button 4
+        </Button>
+      </div>
+      <div>
+        <Button secondary rounded>
+          Button 4
+        </Button>
       </div>
     </div>
   );

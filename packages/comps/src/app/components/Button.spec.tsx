@@ -1,14 +1,10 @@
 import { render } from '@testing-library/react';
-import Button, { ButtonProps } from './Button';
+import Button from './Button';
 
 describe('Button', () => {
   test('displays the given text', () => {
-    const { getByText } = createComponent({ text: 'Custom Text' });
+    const { getByText } = render(<Button>Custom Text</Button>);
 
     expect(getByText('Custom Text')).toBeInTheDocument();
   });
 });
-
-function createComponent(props: ButtonProps) {
-  return render(<Button {...props} />);
-}
