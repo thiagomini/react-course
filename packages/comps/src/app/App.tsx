@@ -1,9 +1,9 @@
-import ButtonPage from './pages/ButtonPage';
+import AccordionPage from './pages/AccordionPage';
 
 export function App() {
   return (
     <div>
-      <ButtonPage />
+      <AccordionPage />
     </div>
   );
 }
