@@ -2,8 +2,8 @@ import { render } from '@testing-library/react';
 import Accordion, { AccordionProps } from './Accordion';
 
 describe('Accordion', () => {
-  test('displays the given item', () => {
-    const { getByText } = createComponent({
+  test('displays the given item title', () => {
+    const { queryByText } = createComponent({
       items: [
         {
           title: 'Title 1',
@@ -12,8 +12,8 @@ describe('Accordion', () => {
       ],
     });
 
-    expect(getByText('Title 1')).toBeInTheDocument();
-    expect(getByText('Content 1')).toBeInTheDocument();
+    expect(queryByText('Title 1')).toBeInTheDocument();
+    expect(queryByText('Content 1')).not.toBeInTheDocument();
   });
 });
 
