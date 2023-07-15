@@ -1,5 +1,5 @@
 import { OneOf } from '@react-course/utils';
-import { PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import className from 'classnames';
 
 export type ButtonProps = PropsWithChildren<
@@ -13,7 +13,8 @@ export type ButtonProps = PropsWithChildren<
     warning?: boolean;
     danger?: boolean;
   }>
->;
+> &
+  ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
   children,
@@ -24,13 +25,15 @@ function Button({
   danger,
   rounded,
   outline,
+  ...btnProps
 }: ButtonProps) {
   const classes = className('flex items-center px-3 py-1.5 border', {
-    'bg-blue-500 border-blue-600 text-white': primary,
-    'bg-gray-500 border-gray-600 text-white': secondary,
-    'bg-green-500 border-green-600 text-white': success,
-    'bg-yellow-400 border-yellow-400 text-white': warning,
-    'bg-red-500 border-red-500 text-white': danger,
+    'text-white': !outline,
+    'bg-blue-500 border-blue-600': primary,
+    'bg-gray-500 border-gray-600': secondary,
+    'bg-green-500 border-green-600': success,
+    'bg-yellow-500 border-yellow-500': warning,
+    'bg-red-500 border-red-500': danger,
     'rounded-full': rounded,
     'bg-white border-2': outline,
     'text-blue-400': outline && primary,
@@ -40,7 +43,11 @@ function Button({
     'text-red-400': outline && danger,
   });
 
-  return <button className={classes}>{children}</button>;
+  return (
+    <button {...btnProps} className={classes}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;

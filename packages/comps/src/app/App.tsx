@@ -4,13 +4,17 @@ import Button from './components/Button';
 import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export function App() {
+  const handleClick = () => console.log('Click!');
+
   return (
     <div>
       <div>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
       </div>
       <div>
-        <Button primary>Button 1</Button>
+        <Button primary onClick={handleClick}>
+          Button 1
+        </Button>
       </div>
       <div>
         <Button danger outline>
