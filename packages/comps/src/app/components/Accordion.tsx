@@ -21,18 +21,23 @@ export default function Accordion({ items }: AccordionProps) {
   const renderedItems = items.map((item, index) => {
     const isContentVisible = index === visibleItem;
     const icon = (
-      <span>{isContentVisible ? <GoChevronDown /> : <GoChevronLeft />}</span>
+      <span className="text-2xl">
+        {isContentVisible ? <GoChevronDown /> : <GoChevronLeft />}
+      </span>
     );
 
     return (
       <div key={item.title}>
-        <div onClick={() => handleClickForItem(index)}>
+        <div
+          className="flex justify-between pg-3 bg-gray-50 border-b items-center cursor-pointer"
+          onClick={() => handleClickForItem(index)}
+        >
           {item.title}
           {icon}
         </div>
-        {isContentVisible && <p>{item.content}</p>}
+        {isContentVisible && <div className="border-b p-5">{item.content}</div>}
       </div>
     );
   });
-  return <div>{renderedItems}</div>;
+  return <div className="border-x border-t rounded">{renderedItems}</div>;
 }
