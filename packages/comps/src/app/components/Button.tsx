@@ -27,21 +27,25 @@ function Button({
   outline,
   ...btnProps
 }: ButtonProps) {
-  const classes = className('flex items-center px-3 py-1.5 border', {
-    'text-white': !outline,
-    'bg-blue-500 border-blue-600': primary,
-    'bg-gray-500 border-gray-600': secondary,
-    'bg-green-500 border-green-600': success,
-    'bg-yellow-500 border-yellow-500': warning,
-    'bg-red-500 border-red-500': danger,
-    'rounded-full': rounded,
-    'bg-white border-2': outline,
-    'text-blue-400': outline && primary,
-    'text-gray-400': outline && secondary,
-    'text-green-400': outline && success,
-    'text-yellow-400': outline && warning,
-    'text-red-400': outline && danger,
-  });
+  const classes = className(
+    btnProps.className,
+    'flex items-center px-3 py-1.5 border',
+    {
+      'text-white': !outline,
+      'bg-blue-500 border-blue-600': primary,
+      'bg-gray-500 border-gray-600': secondary,
+      'bg-green-500 border-green-600': success,
+      'bg-yellow-500 border-yellow-500': warning,
+      'bg-red-500 border-red-500': danger,
+      'rounded-full': rounded,
+      'bg-white border-2': outline,
+      'text-blue-400': outline && primary,
+      'text-gray-400': outline && secondary,
+      'text-green-400': outline && success,
+      'text-yellow-400': outline && warning,
+      'text-red-400': outline && danger,
+    }
+  );
 
   return (
     <button {...btnProps} className={classes}>
