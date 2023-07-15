@@ -9,7 +9,7 @@ export function App() {
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
       </div>
       <div>
-        <Button>Button 1</Button>
+        <Button primary>Button 1</Button>
       </div>
       <div>
         <Button danger outline>
@@ -25,8 +25,13 @@ export function App() {
         </Button>
       </div>
       <div>
+        <Button success rounded outline>
+          Button 5
+        </Button>
+      </div>
+      <div>
         <Button secondary rounded>
-          Button 4
+          Button 6
         </Button>
       </div>
     </div>
