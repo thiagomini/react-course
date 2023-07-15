@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './App.module.css';
 import Button from './components/Button';
+import { FaTriangleExclamation } from 'react-icons/fa6';
 
 export function App() {
   return (
@@ -17,7 +18,10 @@ export function App() {
         </Button>
       </div>
       <div>
-        <Button warning>Button 3</Button>
+        <Button warning>
+          <FaTriangleExclamation />
+          Button 3
+        </Button>
       </div>
       <div>
         <Button secondary outline>
