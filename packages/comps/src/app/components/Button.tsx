@@ -1,11 +1,11 @@
-import { XOR } from '@react-course/utils';
+import { OneOf } from '@react-course/utils';
 import { PropsWithChildren } from 'react';
 
 export type ButtonProps = PropsWithChildren<
   {
     rounded?: boolean;
     outline?: boolean;
-  } & XOR<{
+  } & OneOf<{
     primary?: boolean;
     secondary?: boolean;
     success?: boolean;

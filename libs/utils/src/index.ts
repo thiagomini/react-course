@@ -1,3 +1,3 @@
 export * from './lib/noop';
 export * from './lib/http';
-export * from './lib/xor.type';
+export * from './lib/one-of.type';
