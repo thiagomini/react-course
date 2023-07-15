@@ -54,6 +54,26 @@ describe('Accordion', () => {
     expect(queryByText('Content 1')).toBeInTheDocument();
   });
 
+  test('hides an item content on double click', async () => {
+    // Arrange
+    const { queryByText, getByText } = createComponent({
+      items: [
+        {
+          title: 'Title 1',
+          content: 'Content 1',
+        },
+      ],
+    });
+    const title = getByText('Title 1');
+
+    // Act
+    await userEvent.click(title);
+    await userEvent.click(title);
+
+    // Assert
+    expect(queryByText('Content 1')).not.toBeInTheDocument();
+  });
+
   test('displays only a single item content on click', async () => {
     // Arrange
     const { queryByText, getByText } = createComponent({
