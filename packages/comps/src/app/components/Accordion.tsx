@@ -27,17 +27,19 @@ export default function Accordion({ items }: AccordionProps) {
     );
 
     return (
-      <div key={item.title}>
-        <div
+      <section key={item.title}>
+        <header
           className="flex justify-between pg-3 bg-gray-50 border-b items-center cursor-pointer"
           onClick={() => handleClickForItem(index)}
         >
-          {item.title}
+          <h2>{item.title}</h2>
           {icon}
-        </div>
-        {isContentVisible && <div className="border-b p-5">{item.content}</div>}
-      </div>
+        </header>
+        {isContentVisible && (
+          <article className="border-b p-5">{item.content}</article>
+        )}
+      </section>
     );
   });
-  return <div className="border-x border-t rounded">{renderedItems}</div>;
+  return <main className="border-x border-t rounded">{renderedItems}</main>;
 }
