@@ -11,15 +11,19 @@ export type AccordionProps = {
 };
 
 export default function Accordion({ items }: AccordionProps) {
-  const [visibleItem, setVisibleItem] = useState<number>();
+  const [expandedIndex, setExpandedIndex] = useState<number>();
 
   const handleClickForItem = (itemIndex: number) => {
-    const newVisibleItem = visibleItem === itemIndex ? undefined : itemIndex;
-    setVisibleItem(newVisibleItem);
+    setExpandedIndex((currentExpandedIndex) => {
+      const newExpandedIndex =
+        currentExpandedIndex === itemIndex ? undefined : itemIndex;
+
+      return newExpandedIndex;
+    });
   };
 
   const renderedItems = items.map((item, index) => {
-    const isContentVisible = index === visibleItem;
+    const isContentVisible = index === expandedIndex;
     const icon = (
       <span className="text-2xl">
         {isContentVisible ? <GoChevronDown /> : <GoChevronLeft />}

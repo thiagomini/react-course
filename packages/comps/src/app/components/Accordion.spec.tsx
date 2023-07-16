@@ -54,7 +54,7 @@ describe('Accordion', () => {
     expect(queryByText('Content 1')).toBeInTheDocument();
   });
 
-  test('hides an item content on double click', async () => {
+  test('collapses an item content on double click', async () => {
     // Arrange
     const { queryByText, getByText } = createComponent({
       items: [
@@ -67,8 +67,7 @@ describe('Accordion', () => {
     const title = getByText('Title 1');
 
     // Act
-    await userEvent.click(title);
-    await userEvent.click(title);
+    await userEvent.dblClick(title);
 
     // Assert
     expect(queryByText('Content 1')).not.toBeInTheDocument();
