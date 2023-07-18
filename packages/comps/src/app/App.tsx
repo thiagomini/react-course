@@ -1,9 +1,9 @@
-import AccordionPage from './pages/AccordionPage';
+import DropdownPage from './pages/DropdownPage';
 
 export function App() {
   return (
     <div>
-      <AccordionPage />
+      <DropdownPage />
     </div>
   );
 }

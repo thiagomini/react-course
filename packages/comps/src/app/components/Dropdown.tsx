@@ -8,7 +8,7 @@ export type DropdownProps = {
 function Dropdown({ options }: DropdownProps) {
   return (
     <div>
-      <label htmlFor="dropdown">Dropdown</label>
+      <label htmlFor="dropdown"></label>
       <select id="dropdown">
         {options.map((option) => (
           <option key={option.value} value={option.value}>
