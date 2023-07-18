@@ -47,12 +47,28 @@ describe('Dropdown', () => {
     ];
 
     // Act
-    render(<Dropdown options={options} defaultValue={'2'} />);
+    render(<Dropdown options={options} selected={'2'} />);
 
     // Assert
     const dropdown = screen.getByRole('combobox', {
       name: /select/i,
     });
     expect(dropdown).toHaveValue('2');
+  });
+
+  test('executes the provided onSelect listener', async () => {
+    // Arrange
+    const options = [
+      { value: '1', label: '1' },
+      { value: '2', label: '2' },
+    ];
+    const onSelect = jest.fn();
+    render(<Dropdown options={options} onSelect={onSelect} />);
+
+    // Act
+    await userEvent.selectOptions(screen.getByRole('combobox'), '2');
+
+    // Assert
+    expect(onSelect).toHaveBeenCalledWith('2');
   });
 });
