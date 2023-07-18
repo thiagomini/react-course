@@ -148,6 +148,9 @@ devDependencies:
   eslint-plugin-react-hooks:
     specifier: 4.6.0
     version: 4.6.0(eslint@8.15.0)
+  eslint-plugin-testing-library:
+    specifier: ^5.11.0
+    version: 5.11.0(eslint@8.15.0)(typescript@5.0.4)
   jest:
     specifier: ^29.6.1
     version: 29.6.1(@types/node@18.14.2)(ts-node@10.9.1)
@@ -6255,6 +6258,19 @@ packages:
       semver: 6.3.1
       string.prototype.matchall: 4.0.8
     dev: false
+
+  /eslint-plugin-testing-library@5.11.0(eslint@8.15.0)(typescript@5.0.4):
+    resolution: {integrity: sha512-ELY7Gefo+61OfXKlQeXNIDVVLPcvKTeiQOoMZG9TeuWa7Ln4dUNRv8JdRWBQI9Mbb427XGlVB1aa1QPZxBJM8Q==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6'}
+    peerDependencies:
+      eslint: ^7.5.0 || ^8.0.0
+    dependencies:
+      '@typescript-eslint/utils': 5.62.0(eslint@8.15.0)(typescript@5.0.4)
+      eslint: 8.15.0
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+    dev: true
 
   /eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
