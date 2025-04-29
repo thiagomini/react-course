@@ -1,4 +1,4 @@
-export type DropdownProps = {
+export interface DropdownProps {
   options: {
     value: string;
     label: string;
