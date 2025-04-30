@@ -17,7 +17,7 @@ describe('Dropdown', () => {
     expect(
       screen.getByRole('combobox', {
         name: /select/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -47,7 +47,7 @@ describe('Dropdown', () => {
     ];
 
     // Act
-    render(<Dropdown options={options} selected={'2'} />);
+    render(<Dropdown options={options} value={'2'} />);
 
     // Assert
     const dropdown = screen.getByRole('combobox', {
@@ -63,7 +63,7 @@ describe('Dropdown', () => {
       { value: '2', label: '2' },
     ];
     const onSelect = jest.fn();
-    render(<Dropdown options={options} onSelect={onSelect} />);
+    render(<Dropdown options={options} onChange={onSelect} />);
 
     // Act
     await userEvent.selectOptions(screen.getByRole('combobox'), '2');
