@@ -1,5 +1,8 @@
-import { PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren } from 'react';
 
-export default function Panel({ children }: PropsWithChildren) {
-  return <div>{children}</div>;
+export default function Panel({
+  children,
+  ...rest
+}: PropsWithChildren<ComponentProps<'div'>>) {
+  return <div {...rest}>{children}</div>;
 }
