@@ -4,7 +4,7 @@ import PanelPage from './pages/PanelPage';
 export function App() {
   return (
     <div>
-      <PanelPage />
+      <DropdownPage />
     </div>
   );
 }
