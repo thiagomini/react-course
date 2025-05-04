@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, ReactEventHandler } from 'react';
+import { FC, MouseEventHandler, PropsWithChildren } from 'react';
 import useNavigation from '../../hooks/use-navigation-context.hooks';
 interface LinkProps extends PropsWithChildren {
   to: string;
@@ -6,7 +6,10 @@ interface LinkProps extends PropsWithChildren {
 
 const Link: FC<LinkProps> = ({ to, children }) => {
   const { navigate } = useNavigation();
-  const handleClick: ReactEventHandler = (event) => {
+  const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    if (event.ctrlKey || event.metaKey) {
+      return; // Ensures the user can open the link in a new tab while holding CTRL or CMD key.
+    }
     event.preventDefault();
     navigate(to);
   };

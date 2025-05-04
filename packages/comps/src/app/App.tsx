@@ -1,27 +1,7 @@
-import { EventHandler, ReactEventHandler, useEffect } from 'react';
-import DropdownPage from './pages/DropdownPage';
-import useNavigation from '../hooks/use-navigation-context.hooks';
-import Link from './components/Link';
-
-function targetIsAnchor(
-  target: EventTarget | null,
-): target is HTMLAnchorElement {
-  return !!target && 'href' in target;
-}
+import RoutesPage from './pages/RoutesPage';
 
 export function App() {
-  const { currentPath, navigate } = useNavigation();
-  console.log(`Current Path: ${currentPath}`);
-  return (
-    <div>
-      <DropdownPage />
-      <Link to="test">
-        <b>This is a Link</b>
-      </Link>
-      <hr></hr>
-      <button onClick={() => navigate('button')}>Example Navigation!</button>
-    </div>
-  );
+  return <RoutesPage />;
 }
 
 export default App;
