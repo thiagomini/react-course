@@ -8,7 +8,7 @@ import PanelPage from './PanelPage';
 
 function RoutesPage() {
   return (
-    <div>
+    <div className="col-span-5">
       <Route path="/">
         <h1>Welcome to Components App</h1>
       </Route>

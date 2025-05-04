@@ -5,7 +5,7 @@ import RoutesPage from './pages/RoutesPage';
 
 export function App() {
   return (
-    <div>
+    <div className="container mx-auto grid grid-cols-6 gap-4 mt-4">
       <Sidebar
         links={[
           {
