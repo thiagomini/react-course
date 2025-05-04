@@ -2,12 +2,15 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 import App from './app/App';
+import { NavigationProvider } from './context/navigation';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') as HTMLElement,
 );
 root.render(
   <StrictMode>
-    <App />
-  </StrictMode>
+    <NavigationProvider>
+      <App />
+    </NavigationProvider>
+  </StrictMode>,
 );

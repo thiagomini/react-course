@@ -1,5 +1,4 @@
 import Dropdown from '../components/Dropdown';
-import Link from '../components/Link';
 
 function DropdownPage() {
   return (
@@ -11,7 +10,6 @@ function DropdownPage() {
           { value: 'yellow', label: 'Yellow' },
         ]}
       />
-      <Link to="test" />
     </div>
   );
 }

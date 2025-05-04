@@ -1,5 +1,7 @@
 import { EventHandler, ReactEventHandler, useEffect } from 'react';
 import DropdownPage from './pages/DropdownPage';
+import useNavigation from '../hooks/use-navigation-context.hooks';
+import Link from './components/Link';
 
 function targetIsAnchor(
   target: EventTarget | null,
@@ -8,19 +10,14 @@ function targetIsAnchor(
 }
 
 export function App() {
-  useEffect(() => {
-    const logPopState = (event: PopStateEvent) => {
-      console.log('Trying to go to: ', window.location.pathname);
-    };
-    window.addEventListener('popstate', logPopState);
-
-    return () => {
-      window.removeEventListener('popstate', logPopState);
-    };
-  }, []);
+  const { currentPath, navigate } = useNavigation();
+  console.log(`Current Path: ${currentPath}`);
   return (
     <div>
       <DropdownPage />
+      <Link to="test" />
+      <hr></hr>
+      <button onClick={() => navigate('button')}>Example Navigation!</button>
     </div>
   );
 }
