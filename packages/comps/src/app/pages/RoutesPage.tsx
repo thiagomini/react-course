@@ -8,33 +8,22 @@ import PanelPage from './PanelPage';
 
 function RoutesPage() {
   return (
-    <div className="flex flex-col">
-      <Link to={Routes.Dropdown}>
-        <b>Dropdown Page</b>
-      </Link>
-      <Link to={Routes.Button}>
-        <b>Button Page</b>
-      </Link>
-      <Link to={Routes.Accordion}>
-        <b>Accordion Page</b>
-      </Link>
-      <Link to={Routes.Panel}>
-        <b>Panel Page</b>
-      </Link>
-      <div>
-        <Route path={Routes.Dropdown}>
-          <DropdownPage />
-        </Route>
-        <Route path={Routes.Button}>
-          <ButtonPage />
-        </Route>
-        <Route path={Routes.Accordion}>
-          <AccordionPage />
-        </Route>
-        <Route path={Routes.Panel}>
-          <PanelPage />
-        </Route>
-      </div>
+    <div>
+      <Route path="/">
+        <h1>Welcome to Components App</h1>
+      </Route>
+      <Route path={Routes.Dropdown}>
+        <DropdownPage />
+      </Route>
+      <Route path={Routes.Button}>
+        <ButtonPage />
+      </Route>
+      <Route path={Routes.Accordion}>
+        <AccordionPage />
+      </Route>
+      <Route path={Routes.Panel}>
+        <PanelPage />
+      </Route>
     </div>
   );
 }
