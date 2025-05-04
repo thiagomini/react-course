@@ -15,7 +15,9 @@ export function App() {
   return (
     <div>
       <DropdownPage />
-      <Link to="test" />
+      <Link to="test">
+        <b>This is a Link</b>
+      </Link>
       <hr></hr>
       <button onClick={() => navigate('button')}>Example Navigation!</button>
     </div>
